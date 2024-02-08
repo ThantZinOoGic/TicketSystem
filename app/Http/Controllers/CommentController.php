@@ -53,7 +53,8 @@ class CommentController extends Controller
      */
     public function show($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        return view('comment.detail', compact('comment'));
     }
 
     /**
@@ -64,7 +65,8 @@ class CommentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        return view('comment.edit', compact('comment'));
     }
 
     /**
@@ -76,7 +78,10 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        $comment->body = $request->body;
+        $comment->update();
+        return redirect()->route('comment.index');
     }
 
     /**
@@ -87,6 +92,11 @@ class CommentController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        if($comment)
+        {
+            $comment->delete();
+        }
+        return back();
     }
 }

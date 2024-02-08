@@ -6,12 +6,14 @@
       <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
+        <th>Author</th>
       </tr>
     </thead>
     <tbody>
         <tr>
-            <th scope="row">{{ $label->id }}</th>
-            <td>{{ $label->name }}</td>
+          <th>{{ $comment->id }}</th>
+          <td>{{ $comment->body }}</td>
+          <td>{{ $comment->user->name }}</td>
         </tr> 
     </tbody>
 </table>

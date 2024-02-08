@@ -2,12 +2,12 @@
 
 namespace App\Http\Middleware;
 
-use App\Models\User;
+use App\Models\Ticket;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class MustBeAdmin
+class MustBeAgent
 {
     /**
      * Handle an incoming request.
@@ -18,9 +18,9 @@ class MustBeAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        If(Auth::user()->role != 0)
+        If(Auth::user()->role != 1)
         {
-            abort(401);
+            abort(403);
         }
         return $next($request);
     }

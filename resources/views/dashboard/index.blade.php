@@ -104,12 +104,36 @@
               </p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ route('label.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Labels
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('category.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Categories
+              </p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ route('user.index') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Users
+              </p>
+            </a>
+          </li>
           @endif
           <li class="nav-item">
             <a href="{{ route('ticket.index') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                {{ Auth::user()->role == 0 ? "All Tickets" : "My Ticket" }}
+                Tickets
               </p>
             </a>
           </li>

@@ -19,7 +19,7 @@
       {{-- Description  --}}
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Description</label>
-        <textarea name="description" id="" cols="30" rows="10" class="form-control">
+        <textarea name="description" id="" class="form-control">
           {{ old('description', $ticket->description) }}
         </textarea>
         @error('name')
@@ -29,7 +29,7 @@
   
       {{-- Label  --}}
       <div class="mb-3">
-        <h5>Label</h5>
+        <label class="form-label">Label</label> <br>
         @foreach ($labels as $label)
                   <input type="checkbox" value="{{ $label->id }}" name="label_id[]" 
                           {{ $ticket->labels->contains($label->id) ? 'checked' : '' }}>
@@ -45,7 +45,7 @@
   
       {{-- Category --}}
       <div class="mb-3">
-        <h5>Category</h5>
+        <label for="" class="form-label">Category</label><br>
           @foreach ($categories as $category)
             <input type="checkbox" value="{{ $category->id }}" name="category_id[]" 
                     {{ $ticket->categories->contains($category->id) ? 'checked' : '' }}>
@@ -57,9 +57,20 @@
         @enderror
       </div>
   
+      {{-- status --}}
+
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label">Status</label><br>
+        <input type="radio" name="status" value="0" {{ $ticket->status == 0 ? "checked" : "" }}> <label class="form-label">Close</label>
+        <input type="radio" name="status" value="1" {{ $ticket->status == 1 ? "checked" : "" }}> <label class="form-label">Open</label>
+        @error('name')
+          <small class="text-danger">{{ $message }}</small>
+        @enderror
+      </div>
+
       {{-- Priority --}}
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Priority</label>
+        <label for="exampleInputPassword1" class="form-label">Priority</label><br>
   
         <select class="form-select form-control" aria-label="Default select example" name="priority">
           <option value="0" {{ $ticket->priority == 0 ? "selected" : ""}}>Normal</option>
@@ -69,31 +80,32 @@
           <small class="text-danger">{{ $message }}</small>
         @enderror
       </div>
-  
-      {{-- status --}}
-
-      <div class="mb-3">
-        <h5 for="exampleInputPassword1" class="form-label">Status</h5>
-        <input type="radio" name="status" value="0" {{ $ticket->status == 0 ? "checked" : "" }}> <label class="form-label">Close</label>
-        <input type="radio" name="status" value="1" {{ $ticket->status == 1 ? "checked" : "" }}> <label class="form-label">Open</label>
-        @error('name')
-          <small class="text-danger">{{ $message }}</small>
-        @enderror
-      </div>
 
       {{-- assign agent --}}
+      <div class="mb-3">
+          <label for="agent_id" class="form-label">Assign Agent</label>
+          <select name="agent_id" id="agent_id" class="form-select form-control">
+            @foreach ($users as $user)
+              <option value="{{ $user->id }}">{{ $user->name }}</option>
+            @endforeach
+          </select>
+      </div>
 
-      <select name="agent_id" class="form-select">
-        @foreach ($users as $user)
-          <option value="{{ $user->id }}">{{ $user->name }}</option>
-        @endforeach
-      </select>
 
       {{-- file upload --}}
   
       <div class="mb-3">
-        <label for="formFileMultiple" class="form-label">Multiple files input example</label>
+        <label for="formFileMultiple" class="form-label">Files</label>
         <input class="form-control" name="file[]" type="file" id="formFileMultiple" multiple>
+        <div class="my-3">
+          @if ($ticket->file)
+            @foreach (explode(",",$ticket->file) as $file)
+              <img src="{{ asset('storage/gallery/'.$file) }}" alt="" width="50px" height="50px">
+            @endforeach
+          @else
+            No File
+          @endif
+        </div>
       </div>
       <div>
           <button type="submit" class="btn btn-primary">Update</button>

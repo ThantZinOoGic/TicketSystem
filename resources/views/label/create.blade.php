@@ -6,7 +6,7 @@
     @method('post')
       <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Create Label</label>
-        <input type="text" class="form-control" id="exampleInputPassword1" name="name" value="{{ old('name') }}">
+        <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputPassword1" name="name" value="{{ old('name') }}">
         @error('name')
           <small class="text-danger">{{ $message }}</small>
         @enderror

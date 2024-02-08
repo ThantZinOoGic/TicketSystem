@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreLabelRequest;
+use App\Http\Requests\UpdateLabelRequest;
 use App\Models\Label;
 use Illuminate\Http\Request;
 
@@ -12,6 +14,13 @@ class LableController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->middleware('admin');
+    }
+    
     public function index()
     {
         $labels = Label::all();
@@ -34,7 +43,7 @@ class LableController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreLabelRequest $request)
     {
         $request->validate([
             "name" => "required"
@@ -76,11 +85,8 @@ class LableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateLabelRequest $request, $id)
     {
-        $request->validate([
-            "name" => "required"
-        ]);
         $label = Label::findOrFail($id);
         $label->name = $request->name;
         $label->update();

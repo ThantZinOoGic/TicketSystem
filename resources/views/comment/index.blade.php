@@ -5,7 +5,8 @@
         <thead>
           <tr>
             <th scope="col">#</th>
-            <th scope="col">Name</th>
+            <th scope="col">Comment</th>
+            <th>Author</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -13,7 +14,8 @@
             @foreach ($comments as $comment)
                 <tr>
                     <th scope="row">{{ $comment->id }}</th>
-                    <td>{{ $comment->name }}</td>
+                    <td>{{ $comment->body }}</td>
+                    <td>{{ $comment->user->name }}</td>
                     <td>
                         <a href="{{ route('comment.show', $comment->id) }}" class="btn btn-warning px-3"><i class="fa fa-info"></i></a>
                         <a href="{{ route('comment.edit', $comment->id) }}" class="btn btn-warning"><i class="fa fa-pencil"></i></a>
