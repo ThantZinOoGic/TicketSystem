@@ -107,7 +107,7 @@
 </div> --}}
 
 <div class="row justify-content-around">
-  <div class="col-md-6 p-5">
+  <div class="col-md-6 mt-5">
     <div class="card">
       <div class="mt-4">
         <h3 class="text-center">{{ $ticket->title }}</h3>
@@ -191,8 +191,9 @@
               <div>
                 <h5><i class="fa fa-user"></i> {{ $comment->user->name }}</h5>
               </div>
+              @if(Auth::user()->role == '0' || Auth::user()->id == $comment->user_id)
               <div class="d-flex">
-                <a href="{{ route('comment.show', $comment->id) }}" class="btn btn-warning mx-2"><i class="fa fa-info"></i></a>
+                {{-- <a href="{{ route('comment.show', $comment->id) }}" class="btn btn-warning mx-2"><i class="fa fa-info"></i></a> --}}
                 <a href="{{ route('comment.edit', $comment->id) }}" class="btn btn-warning mx-2"><i class="fa fa-pencil"></i></a>
                 <form action="{{ route('comment.destroy', $comment->id) }}" method="POST" class="d-inline">
                   @csrf
@@ -200,6 +201,8 @@
                   <button class="btn btn-danger mx-2"><i class="fa fa-trash-can"></i></button>
                 </form>
               </div>
+              @endif
+
             </div>
             <div class="mt-2">{{ $comment->body }}</div>
           </div>

@@ -99,7 +99,7 @@
         <input class="form-control" name="file[]" type="file" id="formFileMultiple" multiple>
         <div class="my-3">
           @if ($ticket->file)
-            @foreach (explode(",",$ticket->file) as $file)
+            @foreach (explode(",", $ticket->file) as $file)
               <img src="{{ asset('storage/gallery/'.$file) }}" alt="" width="50px" height="50px">
             @endforeach
           @else

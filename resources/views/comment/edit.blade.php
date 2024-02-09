@@ -5,7 +5,7 @@
     @csrf
     @method('put')
       <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Name</label>
+        <h3 for="exampleInputPassword1" class="form-label"><i class="fa fa-user mr-2 border border-3 p-2 rounded-circle"></i>{{ $comment->user->name }}</h3>
         <input type="text" class="form-control" id="exampleInputPassword1" name="body" value="{{ old('name',$comment->body) }}">
       </div>
       <div>
